@@ -133,7 +133,7 @@ function CardItemDetails(props) {
             />
             <div className=" md:w-max lg:w-1/3 ">
               <div className=" bg-blue-400 rounded-md p-4 mb-4">
-                <div className="flex flex-row justify-between items-center py-2">
+                <div className="flex flex-row justify-between items-center py-2 text-left">
                   <div>
                     <p className="text-white text-md">height</p>
                     <h3 className="text-sm">{data?.height?.maximum}</h3>
@@ -143,9 +143,9 @@ function CardItemDetails(props) {
                     <h3 className="text-sm">{data?.weight?.maximum}</h3>
                   </div>
                 </div>
-                <div className="flex flex-row justify-between items-center py-2">
+                <div className="flex flex-row justify-between items-center py-2 text-right">
                   <div>
-                    <p className="text-white text-md">Category</p>
+                    <p className="text-white text-md">Classification</p>
                     <h3 className="text-sm">{data?.classification}</h3>
                   </div>
                   <div>
@@ -201,6 +201,7 @@ function CardItemDetails(props) {
             onClick={() => {
               setShowEvolution(!showEvolution);
               getEvolutionData();
+              document.body.style.overflow='hidden';
             }}
             className="bg-black mt-0 p-3 m-auto rounded-md w-fit"
           >
