@@ -1,7 +1,6 @@
 import Card from "@/components/cardItem";
 import Loading from "@/components/loading";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Home(props) {
@@ -41,7 +40,6 @@ export default function Home(props) {
             maxCP
             maxHP
             image
-            
           }
         }
       `,
@@ -50,31 +48,36 @@ export default function Home(props) {
     setMainData(
       page < 4
         ? itemData?.slice((page - 1) * 20, page * 20)
-        : itemData?.slice(Math.max(itemData.length - 20, 0))
+        : itemData?.slice(Math.max(itemData.length - 20, 0)),
     );
   }, [page, itemData]);
 
   return (
     <main className="mx-auto px-20 py-10">
-      <div className="border border-l-emerald-800 rounded-md p-2 w-min m-auto">
-        <input
-          className=" outline-none text"
-          value={searchItem}
-          onChange={(e) => setSearchItem(e.target.value)}
-          placeholder="search pokemon"
-        />
+      <div className="flex flex-row items-center justify-between">
+        <h1 className="font-mono font-extrabold ">AnimiBoard</h1>
+        <div className="w-50 m-auto rounded-md border border-l-emerald-800 p-2">
+          <input
+            className="text outline-none"
+            value={searchItem}
+            onChange={(e) => setSearchItem(e.target.value)}
+            placeholder="search pokemon"
+          />
+        </div>
+        <h1 className="font-mono font-bold underline">Logout</h1>
       </div>
-      {mainData === [] ? (
+
+      {mainData?.length > 0 ? (
         <>
           <Loading />
         </>
       ) : (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 px-0 py-10">
+        <div className="grid grid-cols-1 gap-8 px-0 py-10 md:grid-cols-2 lg:grid-cols-4">
           {mainData
             ?.filter((item) =>
               item?.name
                 ?.toLocaleLowerCase()
-                .startsWith(searchItem?.toLocaleLowerCase())
+                .startsWith(searchItem?.toLocaleLowerCase()),
             )
             .map((item, index) => {
               const itemData1 = mainData?.filter((e) => e.id === item.id);
@@ -97,15 +100,15 @@ export default function Home(props) {
       )}
 
       {mainData !== [] && (
-        <div className="p-4 flex flex-row justify-center items-center">
+        <div className="flex flex-row items-center justify-center p-4">
           {arr.map((item, index) => {
             return (
               <div
                 key={index}
                 onClick={() => setPage(item)}
-                className={`border cursor-pointer ${
+                className={`cursor-pointer border ${
                   page == index + 1 ? "bg-slate-300" : "white"
-                } hover:bg-slate-300 border-gray-400 rounded-md p-3 mr-3`}
+                } mr-3 rounded-md border-gray-400 p-3 hover:bg-slate-300`}
               >
                 <p>{item}</p>
               </div>

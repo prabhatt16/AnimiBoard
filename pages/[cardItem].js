@@ -1,8 +1,7 @@
 import Card from "@/components/cardItem";
 import Loading from "@/components/loading";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { useRouter } from "next/router";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Modal from "react-modal";
 
 function CardItemDetails(props) {
@@ -72,7 +71,7 @@ function CardItemDetails(props) {
     const localData = JSON.parse(getAccessToken());
     if (localData?.pageNumber === 1) {
       const itemData = props?.launches?.filter(
-        (item) => item.id === localData?.itemId
+        (item) => item.id === localData?.itemId,
       );
       setData(itemData && itemData[0]);
     } else {
@@ -115,41 +114,41 @@ function CardItemDetails(props) {
   }, [props.launches]);
 
   return (
-    <div className="flex justify-center items-start">
+    <div className="flex items-start justify-center">
       {data === null || data === {} ? (
         <div>
           <Loading />
         </div>
       ) : (
-        <div className=" bg-gray-100 flex flex-col justify-between items-center w-5/6 h-full p-6">
-          <div className="flex flex-row justify-center items-center">
+        <div className=" flex h-full w-5/6 flex-col items-center justify-between bg-gray-100 p-6">
+          <div className="flex flex-row items-center justify-center">
             <p className=" text-2xl font-bold ">{data?.name} </p>
-            <p className=" text-gray-500 text-xl pl-3"> #{data?.number}</p>
+            <p className=" pl-3 text-xl text-gray-500"> #{data?.number}</p>
           </div>
-          <div className="flex flex-row justify-evenly items-center flex-wrap w-full py-10">
+          <div className="flex w-full flex-row flex-wrap items-center justify-evenly py-10">
             <img
               src={data?.image}
-              className=" rounded-md lg:w-64 lg:h-60  object-contain"
+              className=" rounded-md object-contain lg:h-60  lg:w-64"
             />
             <div className=" md:w-max lg:w-1/3 ">
-              <div className=" bg-blue-400 rounded-md p-4 mb-4">
-                <div className="flex flex-row justify-between items-center py-2 text-left">
+              <div className=" mb-4 rounded-md bg-blue-400 p-4">
+                <div className="flex flex-row items-center justify-between py-2 text-left">
                   <div>
-                    <p className="text-white text-md">height</p>
+                    <p className="text-md text-white">height</p>
                     <h3 className="text-sm">{data?.height?.maximum}</h3>
                   </div>
                   <div>
-                    <p className="text-white text-md">Weight</p>
+                    <p className="text-md text-white">Weight</p>
                     <h3 className="text-sm">{data?.weight?.maximum}</h3>
                   </div>
                 </div>
-                <div className="flex flex-row justify-between items-center py-2 text-right">
+                <div className="flex flex-row items-center justify-between py-2 text-right">
                   <div>
-                    <p className="text-white text-md">Classification</p>
+                    <p className="text-md text-white">Classification</p>
                     <h3 className="text-sm">{data?.classification}</h3>
                   </div>
                   <div>
-                    <p className="text-white text-md">Flee Rate</p>
+                    <p className="text-md text-white">Flee Rate</p>
                     <h3 className="text-sm">{data?.fleeRate}</h3>
                   </div>
                 </div>
@@ -160,9 +159,9 @@ function CardItemDetails(props) {
                   {data?.types?.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-orange-400 rounded-sm px-6 mr-3 mb-3 w-fit py-1"
+                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-white text-sm">{item}</p>
+                      <p className=" text-sm text-white">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -174,9 +173,9 @@ function CardItemDetails(props) {
                   {data?.weaknesses?.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-orange-400 rounded-sm px-6 mr-3 mb-3 w-fit py-1"
+                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-white text-sm">{item}</p>
+                      <p className=" text-sm text-white">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -188,9 +187,9 @@ function CardItemDetails(props) {
                   {data?.resistant?.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-orange-400 rounded-sm px-6 mr-3 mb-3 w-fit py-1"
+                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-white text-sm">{item}</p>
+                      <p className=" text-sm text-white">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -201,19 +200,19 @@ function CardItemDetails(props) {
             onClick={() => {
               setShowEvolution(!showEvolution);
               getEvolutionData();
-              document.body.style.overflow='hidden';
+              document.body.style.overflow = "hidden";
             }}
-            className="bg-black mt-0 p-3 m-auto rounded-md w-fit"
+            className="m-auto mt-0 w-fit rounded-md bg-black p-3"
           >
-            <h3 className="text-white text-md text-center">Evolution</h3>
+            <h3 className="text-md text-center text-white">Evolution</h3>
           </div>
           <Modal
             isOpen={showEvolution}
             onRequestClose={() => setShowEvolution(false)}
             style={customStyles}
           >
-            <div className="flex flex-row justify-between items-center py-2">
-              <h3 className=" font-semibold text-lg">Evolutions</h3>
+            <div className="flex flex-row items-center justify-between py-2">
+              <h3 className=" text-lg font-semibold">Evolutions</h3>
               <button
                 className=" text-blue-400"
                 onClick={() => setShowEvolution(false)}
@@ -221,7 +220,7 @@ function CardItemDetails(props) {
                 Close
               </button>
             </div>
-            <div className="flex flex-row justify-evenly flex-wrap px-3">
+            <div className="flex flex-row flex-wrap justify-evenly px-3">
               {evolutionData?.evolutions !== null ? (
                 evolutionData?.evolutions?.map((item, index) => {
                   return (
@@ -251,7 +250,7 @@ function CardItemDetails(props) {
 
 export async function getStaticPaths() {
   return {
-    fallback: 'blocking',
+    fallback: "blocking",
     paths: [],
   };
 }

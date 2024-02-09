@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 function Card({ image, name, number, types, id, page, isOnClick }) {
   const router = useRouter();
@@ -12,7 +11,7 @@ function Card({ image, name, number, types, id, page, isOnClick }) {
           itemId: id.toString(),
           itemName: name.toString(),
           pageNumber: page.toString(),
-        })
+        }),
       );
     }
     router.push("/" + id);
@@ -21,21 +20,21 @@ function Card({ image, name, number, types, id, page, isOnClick }) {
   return (
     <div
       onClick={isOnClick ? () => handleChange(id, name) : () => {}}
-      className={`flex flex-col items-left space-y-1 p-3 mb-4 border border-gray rounded-md cursor-pointer`}
+      className={`items-left border-gray mb-4 flex cursor-pointer flex-col space-y-1 rounded-md border p-3`}
     >
-      <div className="w-full flex justify-center">
+      <div className="flex w-full justify-center">
         <img className="h-28 w-24 object-fill" src={image} />
       </div>
       <p className=" text-gray-500">#{number}</p>
-      <h3 className=" font-semibold text-lg">{name}</h3>
-      <div className="flex flex-row justify-between items-center w-full">
+      <h3 className=" text-lg font-semibold">{name}</h3>
+      <div className="flex w-full flex-row items-center justify-between">
         {types?.map((item, index) => {
           return (
             <div
               key={index}
               className={` ${
                 index === 0 ? "bg-orange-400" : "bg-red-400"
-              } rounded-sm px-6 py-1 text-white text-sm`}
+              } rounded-sm px-6 py-1 text-sm text-white`}
             >
               {item}
             </div>
