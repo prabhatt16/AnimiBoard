@@ -9,7 +9,9 @@ export default function Home(props) {
   const [itemData, setItemData] = useState([]);
   const [mainData, setMainData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
+  const sum = (a) => (b) => (typeof b === "undefined" ? a : sum(a + b));
 
+  console.log(sum(2)(3)(5)(2)(3)(5)(2)(3)(5));
   useEffect(() => {
     const client = new ApolloClient({
       uri: "https://graphql-pokemon2.vercel.app",
@@ -51,6 +53,7 @@ export default function Home(props) {
         : itemData?.slice(Math.max(itemData.length - 20, 0)),
     );
   }, [page, itemData]);
+  console.log("maindata", mainData);
 
   return (
     <main className="mx-auto px-20 py-10">
@@ -67,7 +70,7 @@ export default function Home(props) {
         <h1 className="font-mono font-bold underline">Logout</h1>
       </div>
 
-      {mainData?.length > 0 ? (
+      {mainData?.length === 0 ? (
         <>
           <Loading />
         </>
