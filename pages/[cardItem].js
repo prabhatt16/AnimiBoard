@@ -21,6 +21,9 @@ function CardItemDetails(props) {
       bottom: "auto",
       marginRight: "50%",
       transform: "translate(-50%, -50%)",
+      borderWidth: 3,
+      borderColor: "#000",
+      width: "50%",
     },
   };
 
@@ -115,12 +118,12 @@ function CardItemDetails(props) {
 
   return (
     <div className="flex items-start justify-center">
-      {data === null || data === {} ? (
+      {data === null || !data ? (
         <div>
           <Loading />
         </div>
       ) : (
-        <div className=" flex h-full w-5/6 flex-col items-center justify-between bg-gray-100 p-6">
+        <div className=" flex h-full w-3/5 flex-col items-center justify-between bg-gray-100 p-6">
           <div className="flex flex-row items-center justify-center">
             <p className=" text-2xl font-bold ">{data?.name} </p>
             <p className=" pl-3 text-xl text-gray-500"> #{data?.number}</p>
@@ -134,62 +137,80 @@ function CardItemDetails(props) {
               <div className=" mb-4 rounded-md bg-blue-400 p-4">
                 <div className="flex flex-row items-center justify-between py-2 text-left">
                   <div>
-                    <p className="text-md text-white">height</p>
-                    <h3 className="text-sm">{data?.height?.maximum}</h3>
+                    <p className="text-md font-extrabold text-white">Height</p>
+                    <h3 className="text-sm font-semibold">
+                      {data?.height?.maximum}
+                    </h3>
                   </div>
                   <div>
-                    <p className="text-md text-white">Weight</p>
-                    <h3 className="text-sm">{data?.weight?.maximum}</h3>
+                    <p className="text-md font-extrabold text-white">Weight</p>
+                    <h3 className="text-sm font-semibold">
+                      {data?.weight?.maximum}
+                    </h3>
                   </div>
                 </div>
-                <div className="flex flex-row items-center justify-between py-2 text-right">
+                <div className="flex flex-row items-center justify-between py-2 text-left">
                   <div>
-                    <p className="text-md text-white">Classification</p>
-                    <h3 className="text-sm">{data?.classification}</h3>
+                    <p className="text-md font-extrabold text-white">
+                      Classification
+                    </p>
+                    <h3 className="text-sm font-semibold">
+                      {data?.classification}
+                    </h3>
                   </div>
                   <div>
-                    <p className="text-md text-white">Flee Rate</p>
-                    <h3 className="text-sm">{data?.fleeRate}</h3>
+                    <p className="text-md font-extrabold text-white">
+                      Flee Rate
+                    </p>
+                    <h3 className="float-right text-sm font-semibold">
+                      {data?.fleeRate}
+                    </h3>
                   </div>
                 </div>
               </div>
               <div className="mb-4">
-                <p className="mb-2">Types</p>
+                <p className="mb-2 font-bold">Types</p>
                 <div className="flex flex-row flex-wrap">
                   {data?.types?.map((item, index) => (
                     <div
                       key={index}
-                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
+                      className="mb-3 mr-3 w-fit rounded-md bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-sm text-white">{item}</p>
+                      <p className=" text-sm font-semibold text-white">
+                        {item}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="">
-                <p className="mb-2">Weaknesses</p>
+                <p className="mb-2 font-bold">Weaknesses</p>
                 <div className="flex flex-row flex-wrap">
                   {data?.weaknesses?.map((item, index) => (
                     <div
                       key={index}
-                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
+                      className="mb-3 mr-3 w-fit rounded-md bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-sm text-white">{item}</p>
+                      <p className=" text-sm font-semibold text-white">
+                        {item}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mb-4">
-                <p className="mb-2">Resistant</p>
+              <div className="my-4">
+                <p className="mb-2 font-bold">Resistant</p>
                 <div className="flex flex-row flex-wrap">
                   {data?.resistant?.map((item, index) => (
                     <div
                       key={index}
-                      className="mb-3 mr-3 w-fit rounded-sm bg-orange-400 px-6 py-1"
+                      className="mb-3 mr-3 w-fit rounded-md bg-orange-400 px-6 py-1"
                     >
-                      <p className=" text-sm text-white">{item}</p>
+                      <p className=" text-sm font-semibold text-white">
+                        {item}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -204,7 +225,9 @@ function CardItemDetails(props) {
             }}
             className="m-auto mt-0 w-fit rounded-md bg-black p-3"
           >
-            <h3 className="text-md text-center text-white">Evolution</h3>
+            <h3 className="text-md px-12 text-center font-mono font-extrabold text-white">
+              Evolution
+            </h3>
           </div>
           <Modal
             isOpen={showEvolution}
@@ -214,7 +237,7 @@ function CardItemDetails(props) {
             <div className="flex flex-row items-center justify-between py-2">
               <h3 className=" text-lg font-semibold">Evolutions</h3>
               <button
-                className=" text-blue-400"
+                className="font-mono font-extrabold text-blue-500"
                 onClick={() => setShowEvolution(false)}
               >
                 Close
@@ -224,7 +247,7 @@ function CardItemDetails(props) {
               {evolutionData?.evolutions !== null ? (
                 evolutionData?.evolutions?.map((item, index) => {
                   return (
-                    <div className="sm:w-full lg:w-1/2">
+                    <div className="sm:w-full lg:w-1/2" key={index}>
                       <Card
                         isOnClick={false}
                         key={item.id}

@@ -9,9 +9,7 @@ export default function Home(props) {
   const [itemData, setItemData] = useState([]);
   const [mainData, setMainData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
-  const sum = (a) => (b) => (typeof b === "undefined" ? a : sum(a + b));
 
-  console.log(sum(2)(3)(5)(2)(3)(5)(2)(3)(5));
   useEffect(() => {
     const client = new ApolloClient({
       uri: "https://graphql-pokemon2.vercel.app",
@@ -53,13 +51,12 @@ export default function Home(props) {
         : itemData?.slice(Math.max(itemData.length - 20, 0)),
     );
   }, [page, itemData]);
-  console.log("maindata", mainData);
 
   return (
     <main className="mx-auto px-20 py-10">
       <div className="flex flex-row items-center justify-between">
-        <h1 className="font-mono font-extrabold ">AnimiBoard</h1>
-        <div className="w-50 m-auto rounded-md border border-l-emerald-800 p-2">
+        <h1 className="font-mono text-2xl font-extrabold">AnimiBoard</h1>
+        <div className="m-auto w-1/2 rounded-md border border-l-emerald-800 p-2">
           <input
             className="text outline-none"
             value={searchItem}
@@ -67,7 +64,9 @@ export default function Home(props) {
             placeholder="search pokemon"
           />
         </div>
-        <h1 className="font-mono font-bold underline">Logout</h1>
+        <h1 className="font-mono text-sm font-bold text-red-500 underline">
+          Logout
+        </h1>
       </div>
 
       {mainData?.length === 0 ? (
@@ -102,7 +101,7 @@ export default function Home(props) {
         </div>
       )}
 
-      {mainData !== [] && (
+      {mainData?.length === 0 && mainData.length > 0 && (
         <div className="flex flex-row items-center justify-center p-4">
           {arr.map((item, index) => {
             return (
