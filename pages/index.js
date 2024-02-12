@@ -101,7 +101,7 @@ export default function Home(props) {
         </div>
       )}
 
-      {mainData?.length === 0 && mainData.length > 0 && (
+      {mainData?.length !== 0 && mainData.length > 0 && (
         <div className="flex flex-row items-center justify-center p-4">
           {arr.map((item, index) => {
             return (

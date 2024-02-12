@@ -6,7 +6,7 @@ function Loading() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCounter(counter + 1);
-    }, 1000);
+    }, 200);
 
     if (counter > 3) {
       setCounter(0);
