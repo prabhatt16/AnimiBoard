@@ -9,6 +9,7 @@ export default function Home(props) {
   const [itemData, setItemData] = useState([]);
   const [mainData, setMainData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
+  // const screenWidth = Window.innerWidth;
 
   useEffect(() => {
     const client = new ApolloClient({
@@ -48,15 +49,17 @@ export default function Home(props) {
     setMainData(
       page < 4
         ? itemData?.slice((page - 1) * 20, page * 20)
-        : itemData?.slice(Math.max(itemData.length - 20, 0)),
+        : itemData?.slice(Math.max(itemData.length - 20, 0))
     );
   }, [page, itemData]);
 
   return (
     <main className="mx-auto px-20 py-10">
-      <div className="flex flex-row items-center justify-between">
-        <h1 className="font-mono text-2xl font-extrabold">AnimiBoard</h1>
-        <div className="m-auto w-1/2 rounded-md border border-l-emerald-800 p-2">
+      <div className="flex flex-col md:flex-row items-center justify-between">
+        <h1 className={`font-mono text-2xl font-extrabold mb-4 lg:mb-0`}>
+          AnimiBoard
+        </h1>
+        <div className="m-auto w-full md:w-1/2 rounded-md border border-l-emerald-800 p-2">
           <input
             className="text outline-none"
             value={searchItem}
@@ -64,9 +67,7 @@ export default function Home(props) {
             placeholder="search pokemon"
           />
         </div>
-        <h1 className="font-mono text-sm font-bold text-red-500 underline">
-          Logout
-        </h1>
+        <h1 className=""></h1>
       </div>
 
       {mainData?.length === 0 ? (
@@ -74,12 +75,12 @@ export default function Home(props) {
           <Loading />
         </>
       ) : (
-        <div className="grid grid-cols-1 gap-8 px-0 py-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 px-0 py-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {mainData
             ?.filter((item) =>
               item?.name
                 ?.toLocaleLowerCase()
-                .startsWith(searchItem?.toLocaleLowerCase()),
+                .startsWith(searchItem?.toLocaleLowerCase())
             )
             .map((item, index) => {
               const itemData1 = mainData?.filter((e) => e.id === item.id);

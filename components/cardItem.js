@@ -20,7 +20,7 @@ function Card({ image, name, number, types, id, page, isOnClick }) {
   return (
     <div
       onClick={isOnClick ? () => handleChange(id, name) : () => {}}
-      className={`items-left border-gray mb-4 flex w-4/5 cursor-pointer flex-col space-y-1 rounded-lg border-2 p-3`}
+      className={`items-left border-gray mb-4 flex cursor-pointer flex-col space-y-1 rounded-lg border-2 p-3`}
     >
       <div className="flex w-full justify-center">
         <img className="h-28 w-24 object-fill" src={image} />

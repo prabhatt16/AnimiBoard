@@ -14,7 +14,7 @@ function CardItemDetails(props) {
       backgroundColor: "rgba(0, 0, 0, 0.6)",
     },
     content: {
-      width: "60%",
+      width: "70%",
       top: "50%",
       left: "50%",
       right: "auto",
@@ -23,7 +23,6 @@ function CardItemDetails(props) {
       transform: "translate(-50%, -50%)",
       borderWidth: 3,
       borderColor: "#000",
-      width: "50%",
     },
   };
 
@@ -74,7 +73,7 @@ function CardItemDetails(props) {
     const localData = JSON.parse(getAccessToken());
     if (localData?.pageNumber === 1) {
       const itemData = props?.launches?.filter(
-        (item) => item.id === localData?.itemId,
+        (item) => item.id === localData?.itemId
       );
       setData(itemData && itemData[0]);
     } else {
@@ -123,8 +122,8 @@ function CardItemDetails(props) {
           <Loading />
         </div>
       ) : (
-        <div className=" flex h-full w-3/5 flex-col items-center justify-between bg-gray-100 p-6">
-          <div className="flex flex-row items-center justify-center">
+        <div className=" flex h-full w-3/5 flex-col items-center justify-between bg-gray-100 px-6 pb-6">
+          <div className=" shadow-sm flex flex-row items-center justify-center w-60 bg-white shadow-slate-300 rounded-br-2xl rounded-bl-2xl py-2">
             <p className=" text-2xl font-bold ">{data?.name} </p>
             <p className=" pl-3 text-xl text-gray-500"> #{data?.number}</p>
           </div>
@@ -247,7 +246,7 @@ function CardItemDetails(props) {
               {evolutionData?.evolutions !== null ? (
                 evolutionData?.evolutions?.map((item, index) => {
                   return (
-                    <div className="sm:w-full lg:w-1/2" key={index}>
+                    <div className="sm:w-full lg:w-1/3" key={index}>
                       <Card
                         isOnClick={false}
                         key={item.id}
