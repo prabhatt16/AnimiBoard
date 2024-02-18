@@ -59,9 +59,9 @@ export default function Home(props) {
         <h1 className={`font-mono text-2xl font-extrabold mb-4 lg:mb-0`}>
           AnimiBoard
         </h1>
-        <div className="m-auto w-full md:w-1/2 rounded-md border border-l-emerald-800 p-2">
+        <div className="m-auto w-full md:w-1/2  rounded-md border-2 border-x-emerald-800 p-2">
           <input
-            className="text outline-none"
+            className="text outline-none w-full"
             value={searchItem}
             onChange={(e) => setSearchItem(e.target.value)}
             placeholder="search pokemon"
