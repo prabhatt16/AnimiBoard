@@ -75,7 +75,7 @@ export default function Home(props) {
           <Loading />
         </>
       ) : (
-        <div className="grid grid-cols-1 gap-8 px-0 py-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 px-0 py-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {mainData
             ?.filter((item) =>
               item?.name
